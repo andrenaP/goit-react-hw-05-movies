@@ -7,21 +7,21 @@ acquainted and configure additional features
 
 ## Creating a repository by template
 
-Use this GoIT repository as a template for creating a repository
-of your project. To use it just tap the `«Use this template»` button and choose
+Use this GoIT repository as a template for creating a repository of your
+project. To use it just tap the `«Use this template»` button and choose
 `«Create a new repository»` option, as you can see on the image below.
 
 ![Creating repo from a template step 1](./assets/template-step-1.png)
 
-The page for creating a new repository will open on the next step. Fill out
-the Name field and make sure the repository is public, then click
+The page for creating a new repository will open on the next step. Fill out the
+Name field and make sure the repository is public, then click
 `«Create repository from template»` button.
 
 ![Creating repo from a template step 2](./assets/template-step-2.png)
 
-You now have a personal project repository, having a repository-template file 
-and folder structure. After that, you can work with it as you would with any 
-other private repository: clone it on your computer, write code, commit, and 
+You now have a personal project repository, having a repository-template file
+and folder structure. After that, you can work with it as you would with any
+other private repository: clone it on your computer, write code, commit, and
 send it to GitHub.
 
 ## Preparing for coding
@@ -71,7 +71,7 @@ icon, and in the drop-down window, follow the link `Details`.
 After some time, usually a couple of minutes, the live page can be viewed at the
 address specified in the edited `homepage` property. For example, here is a link
 to a live version for this repository
-[https://goitacademy.github.io/react-homework-template](https://goitacademy.github.io/react-homework-template).
+[https://andrenaP.github.io/goit-react-hw-05-movies](https://andrenaP.github.io/goit-react-hw-05-movies).
 
 If a blank page opens, make sure there are no errors in the `Console` tab
 related to incorrect paths to the CSS and JS files of the project (**404**). You
