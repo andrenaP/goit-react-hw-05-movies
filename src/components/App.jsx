@@ -1,5 +1,3 @@
-import ApiServiceClass from './service';
-import DataForomFIle from '../json/All.json';
 import { Routes, Route, NavLink } from 'react-router-dom';
 import React from 'react';
 
@@ -7,8 +5,6 @@ import { Home } from './Home/Home';
 import { Movies } from './Movies/Movies';
 import { MoviesDetails } from './MoviesDetails/MoviesDetails';
 // import Products from "path/to/pages/Products";
-
-const ApiService = new ApiServiceClass();
 
 export const App = () => {
   return (

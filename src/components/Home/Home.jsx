@@ -1,5 +1,5 @@
 import DataForomFIle from '../json/All';
-import { nanoid } from 'nanoid';
+import { Link } from 'react-router-dom';
 export function Home() {
   console.log(DataForomFIle);
   const books = DataForomFIle.results;
@@ -13,7 +13,7 @@ export function Home() {
             return (
               <li key={id}>
                 <img src={PosterFirstPart + poster_path} alt={original_name} />
-                <a href={PosterFirstPart + poster_path}>{original_title}</a>
+                <Link to={'movies/' + id}>{original_title}</Link>
               </li>
             );
           }
