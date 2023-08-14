@@ -1,0 +1,17 @@
+.FilmItem {
+  display: flex;
+  width: 500px;
+  background-color: bisque;
+}
+.LinkToItem {
+  display: flex;
+  justify-content: center;
+  font-size: 40px;
+}
+.ListOfBooks {
+  display: flex;
+  gap: 30px;
+  flex-direction: column;
+  align-items: flex-start;
+  /* background-color: antiquewhite; */
+}

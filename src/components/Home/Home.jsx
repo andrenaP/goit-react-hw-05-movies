@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import ApiServiceClass from '../service';
-import './Home';
+import './Home.css';
 const ApiService = new ApiServiceClass();
 
 const PosterFirstPart = 'https://image.tmdb.org/t/p/w220_and_h330_face/';
@@ -29,7 +29,7 @@ export function Home() {
   return (
     <main>
       <h1>Home</h1>
-      <ul>
+      <ul className="ListOfBooks">
         {loading && 'Loading ...'}
         {error && <div>{error}</div>}
         {isNotFound && 'No results found'}
@@ -39,11 +39,11 @@ export function Home() {
             .map(({ id, original_title, poster_path }) => {
               return (
                 <li key={id} className="FilmItem">
-                  <img
-                    src={PosterFirstPart + poster_path}
-                    alt={original_title}
-                  />
                   <Link className="LinkToItem" to={'movies/' + id}>
+                    <img
+                      src={PosterFirstPart + poster_path}
+                      alt={original_title}
+                    />
                     {original_title}
                   </Link>
                 </li>
