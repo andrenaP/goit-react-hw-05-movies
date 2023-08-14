@@ -1,4 +1,4 @@
-import DataForomFIle from '../json/All';
+// import DataForomFIle from '../json/All';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import ApiServiceClass from '../service';
@@ -8,7 +8,7 @@ const PosterFirstPart = 'https://image.tmdb.org/t/p/w220_and_h330_face/';
 
 export function Home() {
   const [movies, setMovies] = useState([]);
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   // console.log(DataForomFIle);
@@ -24,7 +24,9 @@ export function Home() {
         .finally(setLoading(false));
     } catch (e) {
       console.log(e);
+      console.log(loading);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
