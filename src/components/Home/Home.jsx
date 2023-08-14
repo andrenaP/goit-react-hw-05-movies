@@ -25,7 +25,7 @@ export function Home() {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const isNotFound = !setApiService && !movies.length;
+  const isNotFound = !getApiService && !movies.length;
   return (
     <main>
       <h1>Home</h1>
