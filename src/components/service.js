@@ -1,9 +1,5 @@
 // const language = 'language=en-US';
-const header = {
-  accept: 'application/json',
-  Authorization:
-    'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5YTA2OTg2YTMwZWVkNDNmMjRmZjJhZmE5ZGY0N2FiOCIsInN1YiI6IjY0ZDg4MzEzZDEwMGI2MDExYzgyM2U2ZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.a8rp64-ZzW-scI2R6ybCgpdPObOATyZzVgg59Sy_an8',
-};
+
 export default class GetApiService {
   async All() {
     const url =
@@ -53,16 +49,32 @@ export default class GetApiService {
 
   async Credits(id) {
     const url = `https://api.themoviedb.org/3/movie/${id}/credits?language=en-US`;
-    const options = { method: 'GET', header };
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization:
+          'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5YTA2OTg2YTMwZWVkNDNmMjRmZjJhZmE5ZGY0N2FiOCIsInN1YiI6IjY0ZDg4MzEzZDEwMGI2MDExYzgyM2U2ZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.a8rp64-ZzW-scI2R6ybCgpdPObOATyZzVgg59Sy_an8',
+      },
+    };
 
-    const Data = await fetch(url, options);
-    return Data.json();
+    return fetch(url, options)
+      .then(res => res.json())
+      .then(json => json.cast);
   }
   async Reviews(id, page = 1) {
     const url = `https://api.themoviedb.org/3/movie/${id}/reviews?language=en-US&page=${page}`;
-    const options = { method: 'GET', header };
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization:
+          'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5YTA2OTg2YTMwZWVkNDNmMjRmZjJhZmE5ZGY0N2FiOCIsInN1YiI6IjY0ZDg4MzEzZDEwMGI2MDExYzgyM2U2ZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.a8rp64-ZzW-scI2R6ybCgpdPObOATyZzVgg59Sy_an8',
+      },
+    };
 
-    const Data = await fetch(url, options);
-    return Data.json();
+    return fetch(url, options)
+      .then(res => res.json())
+      .then(json => json.results);
   }
 }

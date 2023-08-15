@@ -1,38 +1,32 @@
-import { Routes, Route, NavLink } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import React from 'react';
 
-import { Home } from './Home/Home';
-import { Movies } from './Movies/Movies';
-import { MoviesDetails } from './MoviesDetails/MoviesDetails';
+import { Home } from './pages/Home';
+import { Layout } from './Layout';
+import { Movies } from './pages/Movies';
+import { MoviesDetails } from './pages/MoviesDetails';
+import { Cast } from './pages/Cast';
+import { Reviews } from './pages/Reviews';
+import './css/App.css';
 // import Products from "path/to/pages/Products";
 
 export const App = () => {
   return (
-    <div>
-      <header
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: 40,
-          color: '#010101',
-        }}
-      >
-        <nav style={{ display: 'flex', gap: '100px', padding: '20px' }}>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/movies">movies</NavLink>
-        </nav>
-      </header>{' '}
+    <>
       <Routes>
-        <Route path="/" element={<Home></Home>} />
-        <Route path="/movies" element={<Movies></Movies>} />
-        <Route
-          path="/movies/:movieId"
-          element={<MoviesDetails></MoviesDetails>}
-        />
-        <Route path="*" element={<div>NotFound</div>} />
+        <Route path="/" element={<Layout></Layout>}>
+          <Route index element={<Home></Home>} />
+          <Route path="movies" element={<Movies></Movies>} />
+          <Route
+            path="movies/:movieId"
+            element={<MoviesDetails></MoviesDetails>}
+          >
+            <Route path="cast" element={<Cast></Cast>} />
+            <Route path="reviews" element={<Reviews></Reviews>} />
+          </Route>
+          <Route path="*" element={<div>NotFound</div>} />
+        </Route>
       </Routes>
-      <footer></footer>
-    </div>
+    </>
   );
 };

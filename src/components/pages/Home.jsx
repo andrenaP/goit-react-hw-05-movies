@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import ApiServiceClass from '../service';
-import './Home.css';
+import Notiflix from 'notiflix';
+import '../css/Home.css';
 const ApiService = new ApiServiceClass();
 
 const PosterFirstPart = 'https://image.tmdb.org/t/p/w220_and_h330_face/';
@@ -27,11 +28,11 @@ export function Home() {
   }, []);
   const isNotFound = getApiService && !movies.length;
   return (
-    <main>
+    <>
       <h1>Home</h1>
       <ul className="ListOfBooks">
         {loading && 'Loading ...'}
-        {error && <div>{error}</div>}
+        {error && Notiflix.Notify.failure(`Error: ${error}`)}
         {isNotFound && 'No results found'}
         {movies &&
           movies
@@ -50,6 +51,6 @@ export function Home() {
               );
             })}
       </ul>
-    </main>
+    </>
   );
 }
