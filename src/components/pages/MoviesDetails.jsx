@@ -2,9 +2,10 @@ import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import Notiflix from 'notiflix';
 import ApiServiceClass from '../service';
+import css from '../css/MoviesDetails.module.css';
 const ApiService = new ApiServiceClass();
 
-export function MoviesDetails() {
+const MoviesDetails = () => {
   const [movieInfo, setMovieInfo] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -48,15 +49,26 @@ export function MoviesDetails() {
             <p>{movieInfo.overview}</p>
           </div>
           <h3>Additional Information</h3>
-          <Link className="LinkToItem" to={'cast'}>
-            cast
-          </Link>
-          <Link className="LinkToItem" to={'reviews'}>
-            reviews
-          </Link>
+          <ul className={css.GroupOfLinks}>
+            <li>
+              {' '}
+              <Link className={css.LinkToItem} to={'cast'}>
+                cast
+              </Link>
+            </li>
+            <li>
+              {' '}
+              <Link className={css.LinkToItem} to={'reviews'}>
+                reviews
+              </Link>
+            </li>
+          </ul>
+
           <Outlet></Outlet>
         </>
       )}
     </main>
   );
-}
+};
+
+export default MoviesDetails;

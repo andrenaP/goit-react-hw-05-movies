@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 // import Notiflix from 'notiflix';
 import ApiServiceClass from '../service';
 const ApiService = new ApiServiceClass();
-export const Reviews = () => {
+const Reviews = () => {
   const [ReviewsInfo, setReviewsInfo] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -45,3 +45,5 @@ export const Reviews = () => {
     </>
   );
 };
+
+export default Reviews;

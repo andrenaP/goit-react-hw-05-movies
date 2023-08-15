@@ -2,12 +2,12 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import ApiServiceClass from '../service';
 import Notiflix from 'notiflix';
-import '../css/Home.css';
+import css from '../css/Home.module.css';
 const ApiService = new ApiServiceClass();
 
 const PosterFirstPart = 'https://image.tmdb.org/t/p/w220_and_h330_face/';
 
-export function Home() {
+const Home = () => {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -30,7 +30,7 @@ export function Home() {
   return (
     <>
       <h1>Home</h1>
-      <ul className="ListOfBooks">
+      <ul className={css.ListOfBooks}>
         {loading && 'Loading ...'}
         {error && Notiflix.Notify.failure(`Error: ${error}`)}
         {isNotFound && 'No results found'}
@@ -39,8 +39,8 @@ export function Home() {
             .filter(movie => movie.original_title)
             .map(({ id, original_title, poster_path }) => {
               return (
-                <li key={id} className="FilmItem">
-                  <Link className="LinkToItem" to={'movies/' + id}>
+                <li key={id} className={css.FilmItem}>
+                  <Link className={css.LinkToItem} to={'movies/' + id}>
                     <img
                       src={PosterFirstPart + poster_path}
                       alt={original_title}
@@ -53,4 +53,6 @@ export function Home() {
       </ul>
     </>
   );
-}
+};
+
+export default Home;

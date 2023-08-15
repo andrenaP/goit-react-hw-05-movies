@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 import ApiServiceClass from '../service';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import Notiflix from 'notiflix';
+import css from '../css/Movies.module.css';
 const ApiService = new ApiServiceClass();
+
 const PosterFirstPart = 'https://image.tmdb.org/t/p/w220_and_h330_face/';
-export function Movies() {
+const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setquery] = useState(searchParams.get('query') ?? '');
   const [movies, setMovies] = useState([]);
@@ -41,7 +43,7 @@ export function Movies() {
     }
 
     setMovies([]);
-    console.log(query !== '');
+    // console.log(query !== '');
     //setSearchParams({ query: query });
 
     setSearchParams(query !== '' ? { query: query } : {});
@@ -65,9 +67,9 @@ export function Movies() {
         <ul>
           {movies.map(({ id, original_title, poster_path }) => {
             return (
-              <li key={id} className="FilmItem">
+              <li key={id} className={css.FilmItem}>
                 <Link
-                  className="LinkToItem"
+                  className={css.LinkToItem}
                   to={`${id}`}
                   state={{ form: location }}
                 >
@@ -84,4 +86,6 @@ export function Movies() {
       )}
     </>
   );
-}
+};
+
+export default Movies;

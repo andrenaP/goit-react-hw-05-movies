@@ -3,11 +3,12 @@ import { useParams } from 'react-router-dom';
 // import Notiflix from 'notiflix';
 import ApiServiceClass from '../service';
 const ApiService = new ApiServiceClass();
-export const Cast = () => {
+const Cast = () => {
   const [CastInfo, setCastInfo] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const params = useParams();
+
   useEffect(() => {
     setLoading(true);
 
@@ -51,3 +52,4 @@ export const Cast = () => {
     </>
   );
 };
+export default Cast;

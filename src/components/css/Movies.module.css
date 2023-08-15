@@ -1,0 +1,10 @@
+.LinkToItem {
+  display: flex;
+  justify-content: center;
+  font-size: 40px;
+}
+.FilmItem {
+  display: flex;
+  width: 500px;
+  background-color: bisque;
+}
