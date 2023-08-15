@@ -1,5 +1,5 @@
 import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Notiflix from 'notiflix';
 import ApiServiceClass from '../service';
 const ApiService = new ApiServiceClass();
@@ -10,11 +10,11 @@ export function MoviesDetails() {
   const [loading, setLoading] = useState(false);
   const getYear = () => new Date(movieInfo.release_date).getFullYear();
   const params = useParams();
-  const location = useLocation();
-  const backLinkHref = location.state?.from ?? '/movies';
 
-  console.log(location.state);
-  console.log(location.state.from);
+  const location = useLocation();
+  const parsed = location.state?.form;
+  const backLink = parsed ?? '/movies';
+  const backLinkHref = useRef(backLink);
   useEffect(() => {
     setLoading(true);
     ApiService.Details(params.movieId)
@@ -31,7 +31,7 @@ export function MoviesDetails() {
 
   return (
     <main>
-      <Link to={backLinkHref}>Back to products</Link>;
+      <Link to={backLinkHref.current}>Back to products</Link>
       <br />
       {error && Notiflix.Notify.failure(`Error: ${error}`)}
       {loading && 'Loading ...'}
