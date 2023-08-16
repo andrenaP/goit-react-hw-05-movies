@@ -3,6 +3,8 @@ import { useState, useEffect, useRef } from 'react';
 import Notiflix from 'notiflix';
 import ApiServiceClass from '../components/service';
 import css from '../css/MoviesDetails.module.css';
+import defaultIMG from 'picture/NoImage.jpg';
+
 const ApiService = new ApiServiceClass();
 
 const MoviesDetails = () => {
@@ -12,6 +14,9 @@ const MoviesDetails = () => {
   const getYear = () => new Date(movieInfo.release_date).getFullYear();
   const params = useParams();
 
+  const IMGforMovies = movieInfo.poster_path
+    ? `https://image.tmdb.org/t/p/w200/${movieInfo.poster_path}`
+    : defaultIMG;
   const location = useLocation();
   const parsed = location.state?.form;
   const backLink = parsed ?? '/movies';
@@ -37,10 +42,7 @@ const MoviesDetails = () => {
       {loading && 'Loading ...'}
       {movieInfo && (
         <>
-          <img
-            src={`https://image.tmdb.org/t/p/w200/${movieInfo.poster_path}`}
-            alt={movieInfo.title}
-          />
+          <img src={IMGforMovies} alt={movieInfo.title} />
           <h1>{movieInfo.title + ' ' + String(getYear())}</h1>
           <p>User Score: {movieInfo.popularity}%</p>
           <div className="movie_overview">

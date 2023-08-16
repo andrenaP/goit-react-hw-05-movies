@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import css from './MovieList.module.css';
 import defaultIMG from 'picture/NoImage.jpg';
 import { Link } from 'react-router-dom';
@@ -6,9 +7,8 @@ const MovieList = ({ MoviesList, state }) => {
   // console.log(state);
   const ListOfMoviesMaped = MoviesList.map(
     ({ id, original_title, poster_path }) => {
-      const Parsed_poster_path = poster_path
-        ? PosterFirstPart + poster_path
-        : defaultIMG;
+      const Parsed_poster_path =
+        poster_path && poster_path ? PosterFirstPart + poster_path : defaultIMG;
       const ToInLink = `/movies/${id}`;
       if (!original_title) return <div key={id}></div>;
       return (
@@ -30,3 +30,13 @@ const MovieList = ({ MoviesList, state }) => {
   return <ul className={css.MoviesList}>{ListOfMoviesMaped}</ul>;
 };
 export default MovieList;
+
+MovieList.propTypes = {
+  MoviesList: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      original_title: PropTypes.string,
+    })
+  ),
+  state: PropTypes.object.isRequired,
+};
