@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/92.f05caba5.chunk.css","mappings":"AAAA,mCACE,YAAa,CACb,QACF","sources":["css/MoviesDetails.module.css"],"sourcesContent":[".GroupOfLinks {\n  display: flex;\n  gap: 60px;\n}\n"],"names":[],"sourceRoot":""}
