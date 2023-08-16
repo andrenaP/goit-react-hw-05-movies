@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import ApiServiceClass from '../service';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import ApiServiceClass from '../components/service';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import Notiflix from 'notiflix';
-import css from '../css/Movies.module.css';
+import MovieList from '../components/MovieList/MovieList';
 const ApiService = new ApiServiceClass();
 
-const PosterFirstPart = 'https://image.tmdb.org/t/p/w220_and_h330_face/';
 const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setquery] = useState(searchParams.get('query') ?? '');
@@ -64,25 +63,7 @@ const Movies = () => {
       {loading && 'Loading...'}
       {error && Notiflix.Notify.failure(`Error: ${error}`)}
       {movies.length !== 0 && (
-        <ul>
-          {movies.map(({ id, original_title, poster_path }) => {
-            return (
-              <li key={id} className={css.FilmItem}>
-                <Link
-                  className={css.LinkToItem}
-                  to={`${id}`}
-                  state={{ form: location }}
-                >
-                  <img
-                    src={PosterFirstPart + poster_path}
-                    alt={original_title}
-                  />
-                  {original_title}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+        <MovieList MoviesList={movies} state={{ form: location }} />
       )}
     </>
   );

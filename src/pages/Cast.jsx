@@ -1,21 +1,25 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 // import Notiflix from 'notiflix';
-import ApiServiceClass from '../service';
+import ApiServiceClass from '../components/service';
+import CastList from '../components/CastList/CastList';
 const ApiService = new ApiServiceClass();
-const Reviews = () => {
-  const [ReviewsInfo, setReviewsInfo] = useState([]);
+const Cast = () => {
+  const [CastInfo, setCastInfo] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const params = useParams();
+
+  const { movieId } = params;
+
   useEffect(() => {
     setLoading(true);
 
-    ApiService.Reviews(params.movieId)
+    ApiService.Credits(params.movieId)
       .then(json => {
-        setReviewsInfo(json);
+        setCastInfo(json);
         if (json.length === 0) {
-          setError('There is no Reviews');
+          setError('There is no Casts');
         }
       })
       .catch(err => {
@@ -26,24 +30,15 @@ const Reviews = () => {
       });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [movieId]);
 
   return (
     <>
       {/* {error && Notiflix.Notify.failure(`Error: ${error}`)} */}
       {loading && 'Loading ...'}
       {error && `${error}`}
-      {ReviewsInfo.length !== 0 &&
-        ReviewsInfo.map(({ author, content, id }) => {
-          return (
-            <li key={id}>
-              <p>Author: {author}</p>
-              <p>{content}</p>
-            </li>
-          );
-        })}
+      {CastInfo.length !== 0 && <CastList list={CastInfo} />}
     </>
   );
 };
-
-export default Reviews;
+export default Cast;

@@ -1,22 +1,21 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 // import Notiflix from 'notiflix';
-import ApiServiceClass from '../service';
+import ApiServiceClass from '../components/service';
 const ApiService = new ApiServiceClass();
-const Cast = () => {
-  const [CastInfo, setCastInfo] = useState([]);
+const Reviews = () => {
+  const [ReviewsInfo, setReviewsInfo] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const params = useParams();
-
   useEffect(() => {
     setLoading(true);
 
-    ApiService.Credits(params.movieId)
+    ApiService.Reviews(params.movieId)
       .then(json => {
-        setCastInfo(json);
+        setReviewsInfo(json);
         if (json.length === 0) {
-          setError('There is no Casts');
+          setError('There is no Reviews');
         }
       })
       .catch(err => {
@@ -34,22 +33,17 @@ const Cast = () => {
       {/* {error && Notiflix.Notify.failure(`Error: ${error}`)} */}
       {loading && 'Loading ...'}
       {error && `${error}`}
-      {CastInfo.length !== 0 &&
-        CastInfo.map(({ profile_path, name, id, character }) => {
+      {ReviewsInfo.length !== 0 &&
+        ReviewsInfo.map(({ author, content, id }) => {
           return (
             <li key={id}>
-              <img
-                src={`https://image.tmdb.org/t/p/w300/${profile_path}`}
-                alt={`${name} portrait`}
-              />
-              <div>
-                <p>Name: {name}</p>
-                <p>Character: {character}</p>
-              </div>
+              <p>Author: {author}</p>
+              <p>{content}</p>
             </li>
           );
         })}
     </>
   );
 };
-export default Cast;
+
+export default Reviews;

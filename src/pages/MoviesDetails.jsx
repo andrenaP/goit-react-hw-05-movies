@@ -1,7 +1,7 @@
 import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import Notiflix from 'notiflix';
-import ApiServiceClass from '../service';
+import ApiServiceClass from '../components/service';
 import css from '../css/MoviesDetails.module.css';
 const ApiService = new ApiServiceClass();
 

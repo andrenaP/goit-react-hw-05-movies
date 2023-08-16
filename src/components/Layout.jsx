@@ -1,6 +1,6 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import React, { Suspense } from 'react';
-import css from './css/Layout.module.css';
+import css from '../css/Layout.module.css';
 const activeClassName = {
   color: '#2196f3',
 };
