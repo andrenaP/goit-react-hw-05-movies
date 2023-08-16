@@ -16,9 +16,10 @@ const MoviesDetails = () => {
   const parsed = location.state?.form;
   const backLink = parsed ?? '/movies';
   const backLinkHref = useRef(backLink);
+  const { movieId } = params;
   useEffect(() => {
     setLoading(true);
-    ApiService.Details(params.movieId)
+    ApiService.Details(movieId)
       .then(json => setMovieInfo(json))
       .catch(err => {
         setError(err);
@@ -26,9 +27,7 @@ const MoviesDetails = () => {
       .finally(() => {
         setLoading(false);
       });
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [movieId]);
 
   return (
     <main>

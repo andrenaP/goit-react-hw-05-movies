@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 // import Notiflix from 'notiflix';
 import ApiServiceClass from '../components/service';
 import CastList from '../components/CastList/CastList';
+import SubPageHeading from '../components/SubPageHeading/SubPageHeading';
 const ApiService = new ApiServiceClass();
 const Cast = () => {
   const [CastInfo, setCastInfo] = useState([]);
@@ -15,7 +16,7 @@ const Cast = () => {
   useEffect(() => {
     setLoading(true);
 
-    ApiService.Credits(params.movieId)
+    ApiService.Credits(movieId)
       .then(json => {
         setCastInfo(json);
         if (json.length === 0) {
@@ -28,8 +29,6 @@ const Cast = () => {
       .finally(() => {
         setLoading(false);
       });
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [movieId]);
 
   return (
@@ -37,7 +36,12 @@ const Cast = () => {
       {/* {error && Notiflix.Notify.failure(`Error: ${error}`)} */}
       {loading && 'Loading ...'}
       {error && `${error}`}
-      {CastInfo.length !== 0 && <CastList list={CastInfo} />}
+      {CastInfo.length !== 0 && (
+        <>
+          <SubPageHeading>Cast</SubPageHeading>
+          <CastList list={CastInfo} />
+        </>
+      )}
     </>
   );
 };

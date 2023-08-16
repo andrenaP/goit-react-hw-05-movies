@@ -15,3 +15,11 @@
   align-items: flex-start;
   /* background-color: antiquewhite; */
 }
+.img {
+  width: 300px;
+  height: 450px;
+}
+.MoviesList {
+  display: flex;
+  flex-wrap: wrap;
+}

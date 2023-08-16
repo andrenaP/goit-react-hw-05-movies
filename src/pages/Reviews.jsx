@@ -2,16 +2,19 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 // import Notiflix from 'notiflix';
 import ApiServiceClass from '../components/service';
+import ReviewsList from 'components/ReviewsList/ReviewsList';
+import SubPageHeading from '../components/SubPageHeading/SubPageHeading';
 const ApiService = new ApiServiceClass();
 const Reviews = () => {
   const [ReviewsInfo, setReviewsInfo] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const params = useParams();
+  const { movieId } = params;
   useEffect(() => {
     setLoading(true);
 
-    ApiService.Reviews(params.movieId)
+    ApiService.Reviews(movieId)
       .then(json => {
         setReviewsInfo(json);
         if (json.length === 0) {
@@ -24,24 +27,20 @@ const Reviews = () => {
       .finally(() => {
         setLoading(false);
       });
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [movieId]);
 
   return (
     <>
       {/* {error && Notiflix.Notify.failure(`Error: ${error}`)} */}
       {loading && 'Loading ...'}
       {error && `${error}`}
-      {ReviewsInfo.length !== 0 &&
-        ReviewsInfo.map(({ author, content, id }) => {
-          return (
-            <li key={id}>
-              <p>Author: {author}</p>
-              <p>{content}</p>
-            </li>
-          );
-        })}
+      {ReviewsInfo.length !== 0 && (
+        <>
+          <SubPageHeading>Cast</SubPageHeading>
+
+          <ReviewsList list={ReviewsInfo} />
+        </>
+      )}
     </>
   );
 };

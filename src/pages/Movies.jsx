@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import ApiServiceClass from '../components/service';
+import Form from 'components/Form/Form';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import Notiflix from 'notiflix';
 import MovieList from '../components/MovieList/MovieList';
+import PageHeading from '../components/PageHeading/PageHeading';
 const ApiService = new ApiServiceClass();
 
 const Movies = () => {
@@ -14,12 +16,12 @@ const Movies = () => {
   const searchRequest = searchParams.get('query');
   const location = useLocation();
   useEffect(() => {
-    if (!query) {
+    if (!searchRequest) {
       return;
     }
     setLoading(true);
 
-    ApiService.Movie(query)
+    ApiService.Movie(searchRequest)
       .then(json => {
         setMovies(json);
         if (json.length === 0) Notiflix.Notify.warning('There is no result');
@@ -29,9 +31,7 @@ const Movies = () => {
       })
       .finally(() => {
         setLoading(false);
-        setquery('');
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchRequest]);
 
   const handleSubmit = event => {
@@ -41,25 +41,24 @@ const Movies = () => {
       Notiflix.Notify.warning('Enter the film title');
     }
 
-    setMovies([]);
+    // setMovies([]);
     // console.log(query !== '');
     //setSearchParams({ query: query });
 
-    setSearchParams(query !== '' ? { query: query } : {});
+    if (query !== searchRequest) {
+      setMovies([]);
+      setSearchParams(query !== '' ? { query: query } : {});
+      setquery('');
+    } else Notiflix.Notify.warning(`${query} was already found`);
   };
   return (
     <>
-      <h1>Movie Search</h1>
-      <form action="" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="Film"
-          id="film"
-          onChange={event => setquery(event.target.value.toLowerCase())}
-          value={query}
-        />
-        <button type="submit">Search</button>
-      </form>
+      <PageHeading>Movie Search</PageHeading>
+      <Form
+        onSubmit={handleSubmit}
+        onChange={event => setquery(event.target.value.toLowerCase())}
+        value={query}
+      />
       {loading && 'Loading...'}
       {error && Notiflix.Notify.failure(`Error: ${error}`)}
       {movies.length !== 0 && (
