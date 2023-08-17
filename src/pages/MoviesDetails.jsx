@@ -13,19 +13,16 @@ const MoviesDetails = () => {
   const [loading, setLoading] = useState(false);
   const getYear = () => new Date(movieInfo.release_date).getFullYear();
   const params = useParams();
-
   const IMGforMovies = movieInfo.poster_path
     ? `https://image.tmdb.org/t/p/w200/${movieInfo.poster_path}`
     : defaultIMG;
   const location = useLocation();
-  const parsed = location.state?.form;
-  const backLink = parsed ?? '/movies';
-  const backLinkHref = useRef(backLink);
+  const backLinkHref = useRef(location.state?.form ?? '/movies');
   const { movieId } = params;
   useEffect(() => {
     setLoading(true);
     ApiService.Details(movieId)
-      .then(json => setMovieInfo(json))
+      .then(data => setMovieInfo(data))
       .catch(err => {
         setError(err);
       })

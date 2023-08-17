@@ -15,11 +15,12 @@ const Reviews = () => {
     setLoading(true);
 
     ApiService.Reviews(movieId)
-      .then(json => {
-        setReviewsInfo(json);
-        if (json.length === 0) {
+      .then(data => {
+        if (data.length === 0) {
           setError('There is no Reviews');
+          return;
         }
+        setReviewsInfo(data);
       })
       .catch(err => {
         setError(err);

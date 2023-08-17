@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import ApiServiceClass from '../components/service';
 import Notiflix from 'notiflix';
-import { useLocation } from 'react-router-dom';
 // import css from '../css/Home.module.css';
 import MovieList from '../components/MovieList/MovieList';
 import PageHeading from '../components/PageHeading/PageHeading';
@@ -15,13 +14,11 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const [getApiService, setApiService] = useState(false);
 
-  const location = useLocation();
-
   useEffect(() => {
     setLoading(true);
 
     ApiService.All()
-      .then(json => setMovies(json))
+      .then(data => setMovies(data))
       .catch(err => setError(err))
       .finally(() => {
         setLoading(false);
@@ -36,9 +33,7 @@ const Home = () => {
         {loading && 'Loading ...'}
         {error && Notiflix.Notify.failure(`Error: ${error}`)}
         {isNotFound && 'No results found'}
-        {movies.length > 0 && (
-          <MovieList MoviesList={movies} state={{ form: location }} />
-        )}
+        {movies.length > 0 && <MovieList moviesList={movies} />}
       </ul>
     </>
   );
