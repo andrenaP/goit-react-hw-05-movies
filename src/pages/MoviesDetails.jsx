@@ -8,14 +8,12 @@ import defaultIMG from 'picture/NoImage.jpg';
 const ApiService = new ApiServiceClass();
 
 const MoviesDetails = () => {
-  const [movieInfo, setMovieInfo] = useState([]);
+  const [movieInfo, setMovieInfo] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const getYear = () => new Date(movieInfo.release_date).getFullYear();
   const params = useParams();
-  const IMGforMovies = movieInfo.poster_path
-    ? `https://image.tmdb.org/t/p/w200/${movieInfo.poster_path}`
-    : defaultIMG;
+
   const location = useLocation();
   const backLinkHref = useRef(location.state?.form ?? '/movies');
   const { movieId } = params;
@@ -31,6 +29,10 @@ const MoviesDetails = () => {
       });
   }, [movieId]);
 
+  if (!movieInfo) return;
+  const IMGforMovies = movieInfo.poster_path
+    ? `https://image.tmdb.org/t/p/w200/${movieInfo.poster_path}`
+    : defaultIMG;
   return (
     <main>
       <Link to={backLinkHref.current}>Back to products</Link>
